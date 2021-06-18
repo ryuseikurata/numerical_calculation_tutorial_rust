@@ -1,5 +1,6 @@
 [workspace]
 
 members = [
-    "integral"
+    "integral",
+    "fizzbazz"
 ]
