@@ -1,5 +1,5 @@
 [package]
-name = "num-traits"
+name = "integral"
 version = "0.1.0"
 authors = ["シュレック倉田 <32031454+ryuseikurata@users.noreply.github.com>"]
 edition = "2018"
