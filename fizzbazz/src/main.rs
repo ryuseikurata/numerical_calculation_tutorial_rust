@@ -1,3 +1,4 @@
+mod fizzbazz1;
 fn main() {
-    println!("Hello, world!");
+    fizzbazz1::run();
 }
