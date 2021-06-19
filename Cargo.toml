@@ -2,5 +2,6 @@
 
 members = [
     "integral",
-    "fizzbazz"
+    "fizzbazz",
+    "ndarray"
 ]
