@@ -9,15 +9,18 @@ fn main() {
     drawing_area.fill(&WHITE).unwrap();
 
     let mut chart = ChartBuilder::on(&drawing_area)
-        .build_cartesian_2d(-5.0..5.0, 0.0..0.5)
+        .set_label_area_size(LabelAreaPosition::Left, 40)
+        .set_label_area_size(LabelAreaPosition::Bottom, 40)
+        .caption("NormalDistribution", ("sans-selif", 40))
+        .build_cartesian_2d(-5.0..5.0, 0.0..0.3)
         .unwrap();
     let mut norm = NormalDistribution::new(0.0, 1.0);
-
-    println!("{:?}", norm.method(&-1.0));
+    // メッシュ図にする
+    chart.configure_mesh().draw().unwrap();
     chart
         .draw_series(LineSeries::new(
-            (-100..100).map(|x| (x as f64, (norm.method(&(x as f64))))),
-            &BLACK,
+            (-100..=100).map(|x| (x as f64, (norm.method(&(x as f64))))),
+            &RED,
         ))
         .unwrap();
 }
@@ -40,6 +43,7 @@ impl NormalDistribution {
         // sqrtは、累乗根を持つようになる
         // PIは、π
         let denominator = (2.0_f64 * f64::consts::PI).sqrt() * self.sigma;
+        println!("{:?}",numerator/denominator);
         numerator / denominator
     }
 
