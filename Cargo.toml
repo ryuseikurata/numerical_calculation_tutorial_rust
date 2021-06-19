@@ -3,5 +3,6 @@
 members = [
     "integral",
     "fizzbazz",
-    "ndarray"
+    "ndarray",
+    "normal_distribution"
 ]
