@@ -12,14 +12,15 @@ fn main() {
         .set_label_area_size(LabelAreaPosition::Left, 40)
         .set_label_area_size(LabelAreaPosition::Bottom, 40)
         .caption("NormalDistribution", ("sans-selif", 40))
-        .build_cartesian_2d(-5.0..5.0, 0.0..0.3)
+        .build_cartesian_2d(-3.0..3.0, 0.0..0.4)
         .unwrap();
     let mut norm = NormalDistribution::new(0.0, 1.0);
+    norm.show_info();
     // メッシュ図にする
     chart.configure_mesh().draw().unwrap();
     chart
         .draw_series(LineSeries::new(
-            (-100..=100).map(|x| (x as f64, (norm.method(&(x as f64))))),
+            (-100..=100).map(|x| (x as f64, norm.method(&(x as f64)))),
             &RED,
         ))
         .unwrap();
@@ -39,12 +40,12 @@ impl NormalDistribution {
     }
 
     fn method(&mut self, x: &f64) -> f64 {
-        let numerator = (-(x - self.mu).powi(2) / (2.0_f64 * self.sigma.powi(2))).exp();
+        let numerator = -(x - self.mu).powi(2) / (2.0_f64 * self.sigma.powi(2));
         // sqrtは、累乗根を持つようになる
         // PIは、π
         let denominator = (2.0_f64 * f64::consts::PI).sqrt() * self.sigma;
-        println!("{:?}",numerator/denominator);
-        numerator / denominator
+        println!("{:?}", numerator.exp() / denominator);
+        numerator.exp() / denominator
     }
 
     /// 与えられたx(ベクトル)に対して、正規分布に従った
