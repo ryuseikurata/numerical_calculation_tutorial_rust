@@ -52,7 +52,6 @@ impl NormalDistribution {
     }
 
     fn method(&mut self, x: &f64) -> f64 {
-        println!("{:?}", x);
         let numerator = -(x - self.mu).powi(2) / (2.0_f64 * self.sigma.powi(2));
         // sqrtは、累乗根を持つようになる
         // PIは、π
