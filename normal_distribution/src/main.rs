@@ -18,12 +18,24 @@ fn main() {
     norm.show_info();
     // メッシュ図にする
     chart.configure_mesh().draw().unwrap();
+    let x_axis = data();
+
     chart
         .draw_series(LineSeries::new(
-            (-100..=100).map(|x| (x as f64, norm.method(&(x as f64)))),
+            x_axis.iter().map(|x| (x * 1.0, norm.method(&x))),
             &RED,
         ))
         .unwrap();
+}
+
+fn data() -> Vec<f64> {
+    let mut x = 100.0;
+    let mut values = vec![];
+    while -100.0 <= x {
+        values.push(x);
+        x -= 0.1;
+    }
+    values
 }
 
 /// 正規分布
@@ -40,6 +52,7 @@ impl NormalDistribution {
     }
 
     fn method(&mut self, x: &f64) -> f64 {
+        println!("{:?}", x);
         let numerator = -(x - self.mu).powi(2) / (2.0_f64 * self.sigma.powi(2));
         // sqrtは、累乗根を持つようになる
         // PIは、π
