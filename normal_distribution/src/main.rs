@@ -18,24 +18,14 @@ fn main() {
     norm.show_info();
     // メッシュ図にする
     chart.configure_mesh().draw().unwrap();
-    let x_axis = data();
+    let x_axis = (-8.0..8.0).step(0.1);
 
     chart
         .draw_series(LineSeries::new(
-            x_axis.iter().map(|x| (x * 1.0, norm.method(&x))),
+            x_axis.values().map(|x| (x * 1.0, norm.method(&x))),
             &RED,
         ))
         .unwrap();
-}
-
-fn data() -> Vec<f64> {
-    let mut x = 100.0;
-    let mut values = vec![];
-    while -100.0 <= x {
-        values.push(x);
-        x -= 0.1;
-    }
-    values
 }
 
 /// 正規分布
